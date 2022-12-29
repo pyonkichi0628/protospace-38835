@@ -34,13 +34,15 @@
     if @prototype.update(prototype_params)
       redirect_to prototype_path
     else
-      render :edit
+      render :edi
     end
   end
 
   def destroy
-    prototype = Prototype.find(params[:id])
-    prototype.destroy
+    @prototype = Prototype.find(params[:id])
+    if @prototype.destroy
+      redirect_to root_path
+    end
   end
 
 
