@@ -35,7 +35,7 @@
       redirect_to prototype_path
     else
       render :edi
-    end
+    end 
   end
 
   def destroy
@@ -59,3 +59,4 @@
     params.require(:prototype).permit(:title, :catch_copy, :concept, :user, :image).merge(user_id: current_user.id)
   end
 end
+  
