@@ -1,6 +1,11 @@
  class PrototypesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
 
+  #いるかわからない
+  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+  before_action :set_prototype, except: [:index, :new, :create]
+
+
   def index
     @prototype = Prototype.all
   end
@@ -8,7 +13,7 @@
   def new
     @prototype = Prototype.new
   end
-
+  
   def create
     @prototype = Prototype.new(prototype_params)
     if @prototype.save
@@ -34,7 +39,7 @@
     if @prototype.update(prototype_params)
       redirect_to prototype_path
     else
-      render :edi
+      render :edit
     end 
   end
 
@@ -58,5 +63,17 @@
     #require：モデル 、 permitは入力フォームがあるところ（入力されている情報のキー（カラム名））、 merge：後から持っていく情報　(カラム名、値)=カラムに値を入れている
     params.require(:prototype).permit(:title, :catch_copy, :concept, :user, :image).merge(user_id: current_user.id)
   end
+
+  #いるかわからないーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー’
+  def set_prototype
+    @prototype = Prototype.find(params[:id])
+  end
+
+
+  #いるかわからないーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー’
+  def contributor_confirmation
+    redirect_to root_path unless current_user == @prototype.user
+  end
+
 end
   
