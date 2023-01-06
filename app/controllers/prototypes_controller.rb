@@ -2,8 +2,8 @@
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
 
   #いるかわからない
-  before_action :contributor_confirmation, only: [:edit, :update, :destroy]
-  before_action :set_prototype, except: [:index, :new, :create]
+  #before_action :contributor_confirmation, only: [:edit, :update, :destroy]
+ # before_action :set_prototype, except: [:index, :new, :create]
 
 
   def index
@@ -65,15 +65,15 @@
   end
 
   #いるかわからないーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー’
-  def set_prototype
-    @prototype = Prototype.find(params[:id])
-  end
+ # def set_prototype
+  #  @prototype = Prototype.find(params[:id])
+ # end
 
 
   #いるかわからないーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー’
-  def contributor_confirmation
-    redirect_to root_path unless current_user == @prototype.user
-  end
+ # def contributor_confirmation
+  #  redirect_to root_path unless current_user == @prototype.user
+  #end
 
 end
   
